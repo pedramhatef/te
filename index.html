@@ -3,49 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Adventure</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: black;
-            color: white;
-        }
-
-        canvas {
-            background: #222;
-            border: 1px solid #555;
-        }
-    </style>
+    <title>Simple Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="game.js" defer></script>
 </head>
 <body>
-    <h1>Space Adventure Loading...</h1>
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <h1>Guess the Number!</h1>
+    <p>Guess a number between 1 and 10:</p>
+    <input type="number" id="guess" min="1" max="10">
+    <button onclick="checkGuess()">Submit</button>
+    <p id="result"></p>
+
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let spaceship = { x: 180, y: 500, width: 40, height: 40 };
-
-        function drawSpaceship() {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(spaceship.x, spaceship.y, spaceship.width, spaceship.height);
-        }
-
-        function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function gameLoop() {
-            clearCanvas();
-            drawSpaceship();
-            requestAnimationFrame(gameLoop);
-        }
-
-        gameLoop();
+        document.addEventListener("DOMContentLoaded", function() {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            
+            // Additional Telegram Web App integration can be added here
+        });
     </script>
 </body>
 </html>
+
