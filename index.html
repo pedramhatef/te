@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Game</title>
+    <title>Guess the Number</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="game.js" defer></script>
 </head>
 <body>
     <h1>Guess the Number!</h1>
-    <p>Guess a number between 1 and 10:</p>
-    <input type="number" id="guess" min="1" max="10">
-    <button onclick="checkGuess()">Submit</button>
+    <p>Guess a number between 1 and 5:</p>
+    <div id="buttons">
+        <button onclick="checkGuess(1)">1</button>
+        <button onclick="checkGuess(2)">2</button>
+        <button onclick="checkGuess(3)">3</button>
+        <button onclick="checkGuess(4)">4</button>
+        <button onclick="checkGuess(5)">5</button>
+    </div>
     <button id="restartButton" onclick="restartGame()" style="display:none;">Play Again</button>
     <p id="result"></p>
 
@@ -24,4 +29,3 @@
     </script>
 </body>
 </html>
-
