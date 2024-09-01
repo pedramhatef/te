@@ -9,22 +9,20 @@ function generateSecretNumber() {
 function checkGuess() {
     const guess = parseInt(document.getElementById('guess').value);
     const result = document.getElementById('result');
+    const restartButton = document.getElementById('restartButton');
 
     if (guess === secretNumber) {
-        result.textContent = "Congratulations! You guessed right. Starting a new game...";
-        setTimeout(() => {
-            // Restart the game
-            secretNumber = generateSecretNumber();
-            document.getElementById('guess').value = ''; // Clear the input
-            result.textContent = ''; // Clear the result message
-        }, 2000); // 2-second delay before restarting
+        result.textContent = "Congratulations! You guessed right.";
+        restartButton.style.display = 'block'; // Show restart button
     } else {
         result.textContent = "Try again!";
     }
 }
 
-// Optional: You can include Telegram Web Apps SDK integration here if needed
-document.addEventListener("DOMContentLoaded", function() {
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-});
+function restartGame() {
+    secretNumber = generateSecretNumber(); // Generate a new secret number
+    document.getElementById('guess').value = ''; // Clear the input field
+    document.getElementById('result').textContent = ''; // Clear the result message
+    document.getElementById('restartButton').style.display = 'none'; // Hide the restart button
+}
+
