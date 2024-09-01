@@ -3,11 +3,10 @@
 let secretNumber = generateSecretNumber();
 
 function generateSecretNumber() {
-    return Math.floor(Math.random() * 10) + 1;
+    return Math.floor(Math.random() * 5) + 1; // Generates a number between 1 and 5
 }
 
-function checkGuess() {
-    const guess = parseInt(document.getElementById('guess').value);
+function checkGuess(guess) {
     const result = document.getElementById('result');
     const restartButton = document.getElementById('restartButton');
 
@@ -21,7 +20,6 @@ function checkGuess() {
 
 function restartGame() {
     secretNumber = generateSecretNumber(); // Generate a new secret number
-    document.getElementById('guess').value = ''; // Clear the input field
     document.getElementById('result').textContent = ''; // Clear the result message
     document.getElementById('restartButton').style.display = 'none'; // Hide the restart button
 }
