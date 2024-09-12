@@ -3,32 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Number</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tonconnect/sdk@latest"></script>
-
-    <script src="game.js" defer></script>
+    <title>My Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #gameCanvas { border: 1px solid #000; margin-top: 20px; }
+    </style>
 </head>
 <body>
-    <h1>Guess the Number!</h1>
-    <p>Guess a number between 1 and 5:</p>
-    <div id="buttons">
-        <button onclick="checkGuess(1)">1</button>
-        <button onclick="checkGuess(2)">2</button>
-        <button onclick="checkGuess(3)">3</button>
-        <button onclick="checkGuess(4)">4</button>
-        <button onclick="checkGuess(5)">5</button>
-    </div>
-    <button id="restartButton" onclick="restartGame()" style="display:none;">Play Again</button>
-    <p id="result"></p>
+    <h1>My Simple Game</h1>
+    <button id="walletConnectButton">Connect Wallet</button>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <!-- Include TON Connect SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@tonconnect/sdk@latest"></script>
+    <script src="https://pedramhatef.github.io/my-twa/walletConnection.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const tg = window.Telegram.WebApp;
-            tg.ready();
+        // Game setup and logic
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let playerX = canvas.width / 2;
+        let playerY = canvas.height / 2;
+
+        function drawPlayer() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(playerX, playerY, 50, 50);
+        }
+
+        function updateGame() {
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowUp': playerY -= 5; break;
+                    case 'ArrowDown': playerY += 5; break;
+                    case 'ArrowLeft': playerX -= 5; break;
+                    case 'ArrowRight': playerX += 5; break;
+                }
+                drawPlayer();
+            });
+            drawPlayer();
+        }
+
+        updateGame();
+
+        document.getElementById('walletConnectButton').addEventListener('click', async () => {
+            try {
+                await connectWallet();
+                alert('Wallet connected!');
+            } catch (error) {
+                console.error('Error connecting wallet:', error);
+                alert('Failed to connect wallet.');
+            }
         });
     </script>
 </body>
 </html>
+
 
